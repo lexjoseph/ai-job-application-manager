@@ -1,26 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import type { JobApplication } from "../types/jobs";
+import type { JobApplication, ApplicationStatus } from "../types/jobs";
 
 //jobform expects one prop called addApplication
-interface JobFormProps { 
+interface JobFormProps {
   addApplication: (application: JobApplication) => void;
 }
 
 const JobForm = ({ addApplication }: JobFormProps) => {
   const [company, setCompany] = useState<string>("");
   const [role, setRole] = useState<string>("");
+  const [status, setStatus] = useState<ApplicationStatus>("Applied");
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>): void => {
-    e.preventDefault(
-
-    );
+    e.preventDefault();
     const newApplication: JobApplication = {
       id: Date.now(),
       company,
       role,
-      status: "Applied",
+      status,
     };
 
     addApplication(newApplication);
@@ -47,6 +46,18 @@ const JobForm = ({ addApplication }: JobFormProps) => {
           setRole(e.target.value)
         }
       />
+      <select
+        value={status}
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+          setStatus(e.target.value as ApplicationStatus)
+        }
+      >
+        <option value="Applied">Applied</option>
+        <option value="Interviewing">Interviewing</option>
+        <option value="Offer">Offer</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+
       <button type="submit">Add Application</button>
     </form>
   );
