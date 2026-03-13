@@ -3,6 +3,7 @@ export interface JobApplication { //interface describes the object
     company: string;
     role: string;
     status: string;
+    dateApplied: string;
 }
 
 

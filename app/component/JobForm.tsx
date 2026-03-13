@@ -12,6 +12,7 @@ const JobForm = ({ addApplication }: JobFormProps) => {
   const [company, setCompany] = useState<string>("");
   const [role, setRole] = useState<string>("");
   const [status, setStatus] = useState<ApplicationStatus>("Applied");
+  const [dateApplied, setDateApplied] = useState<string>("");
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -20,12 +21,15 @@ const JobForm = ({ addApplication }: JobFormProps) => {
       company,
       role,
       status,
+      dateApplied,
     };
 
     addApplication(newApplication);
 
     setCompany("");
     setRole("");
+    setStatus("Applied");
+    setDateApplied("");
   };
 
   return (
@@ -57,6 +61,14 @@ const JobForm = ({ addApplication }: JobFormProps) => {
         <option value="Offer">Offer</option>
         <option value="Rejected">Rejected</option>
       </select>
+      <input
+        type="date"
+        value={dateApplied}
+        placeholder="date"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setDateApplied(e.target.value)
+        }
+      ></input>
 
       <button type="submit">Add Application</button>
     </form>

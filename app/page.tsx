@@ -6,7 +6,7 @@ import JobForm from "./component/JobForm";
 
 export default function Home() {
   const [applications, setApplication] = useState<JobApplication[]>([]);
-  
+
   const addapplication = (application: JobApplication): void => {
     setApplication((prevApplication) => [application, ...prevApplication]);
   };
@@ -19,7 +19,7 @@ export default function Home() {
       <ul>
         {applications.map((application) => (
           <li key={application.id}>
-            {application.company} - {application.role} - {application.status}
+            {application.company} - {application.role} - {application.status} - {application.dateApplied}
           </li>
         ))}
       </ul>
